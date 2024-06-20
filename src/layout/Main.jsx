@@ -1,7 +1,9 @@
-export default function Main(){
+import Movies from "../components/Movies";
+
+export default function Main(props){
   return (
     <main className="container content">
-      Надпись
+      <Movies films={props.searchResult} />
     </main>
   );
 }

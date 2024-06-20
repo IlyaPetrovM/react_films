@@ -20,3 +20,12 @@ nav{
   min-height: calc(100vh - 70px - 64px);
   padding: 1rem;
 }
+.filmsGrid{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.card{
+  margin: 1rem;
+  max-width: 20rem;
+}
