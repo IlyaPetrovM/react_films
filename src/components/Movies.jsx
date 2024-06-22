@@ -1,19 +1,12 @@
-import Movie from "./Movie";
+import Movie from './Movie';
 
-export default function Movies(props){
-  
-  console.log(props.films);
+export default function Movies(props) {
 
   return (
-    <div className="filmsGrid" >
-      { 
-        props.films.map(film => (
-          <Movie 
-            key={film.imdbID} 
-            title={film.Title} 
-            image={film.Poster} />
-        ))
-      }
+    <div className='filmsGrid'>
+      {props.films.map((film) => (
+        <Movie key={film.imdbID} {...film} />
+      ))}
     </div>
   );
 }
