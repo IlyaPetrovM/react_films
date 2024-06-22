@@ -1,0 +1,8 @@
+{
+  "short_name": "React Films",
+  "name": "React project for my portfolio",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
