@@ -21,11 +21,11 @@ nav {
   padding: 1rem;
 }
 .filmsGrid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
 }
-.card {
+/* .card {
   margin: 1rem;
   max-width: 20rem;
-}
+} */

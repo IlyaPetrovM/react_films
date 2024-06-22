@@ -1,6 +1,6 @@
 export default function (props) {
   console.log(props);
-  const { Title: title, Poster: poster, Year: year } = props;
+  const { Title: title, Poster: poster, Year: year, Type: type } = props;
 
   return (
     <div className='card'>
@@ -13,8 +13,10 @@ export default function (props) {
       </div>
       <div className='card-content'>
         <span className='card-title activator grey-text text-darken-4'>
-          {title} - {year}
+          {title}
         </span>
+        <small>{year} </small>  
+        <small>{type}</small>
       </div>
     </div>
   );
