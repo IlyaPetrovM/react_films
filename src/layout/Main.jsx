@@ -7,33 +7,35 @@ import Search from './Search';
 export default class Main extends React.Component {
   state = {
     films: [],
+    loading:true,
   };
   componentDidMount() {
-    fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=162975a6&s=matri`)
+    fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=162975a6&s=lord`)
       .then((res) => res.json())
       .then((data) => {
-        this.setState({ films: data.Search });
+        this.setState({ films: data.Search, loading:false });
       })
       .catch((err) => {
         console.error(err);
       });
   }
-  search = (s) =>{
-    fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=162975a6&s=${s}`)
+  searchFilms = (search, type = 'all') =>{
+    this.setState({loading:true});
+    fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=162975a6&s=${search}${type=='all' ? '' :'&type='+type}`)
       .then((res) => res.json())
       .then((data) => {
-        this.setState({ films: data.Search });
+        this.setState({ films: data.Search, loading:false });
       })
       .catch((err) => {
         console.error(err);
       });
   }
   render() {
-    const { films } = this.state;
+    const { films, loading } = this.state;
     return (
       <main className='container content'>
-        <Search search={this.search} />
-        {films.length ? <Movies films={films} /> : <Preloader />}
+        <Search searchFilms={this.searchFilms} />
+        {!loading ? <Movies films={films} /> : <Preloader />}
       </main>
     );
   }

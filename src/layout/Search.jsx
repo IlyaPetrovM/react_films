@@ -3,15 +3,20 @@ import React from 'react';
 export default class Search extends React.Component {
   state = {
     search: '',
+    type: 'all',
   };
   handleChange = (event) => {
     this.setState({ search: event.target.value });
   };
   handleKeyDown = (event) => {
-    console.log(event);
     if (event.code !== 'Enter') return;
-    this.props.search(this.state.search); // this.props доступен по-умолчанию
+    this.props.searchFilms(this.state.search, this.state.type); // this.props доступен по-умолчанию
   };
+  handleRadio = (event) => {
+    this.setState({type: event.target.dataset.type}, ()=>{
+      this.props.searchFilms(this.state.search, this.state.type);
+    });
+  }
   render() {
     return (
       <div className='row'>
@@ -26,10 +31,45 @@ export default class Search extends React.Component {
           />
           <button
             className='btn searchButton cyan darken-2'
-            onClick={() => this.props.search(this.state.search)}
+            onClick={() => this.props.searchFilms(this.state.search, this.state.type)}
           >
-            Search
+            Найти
           </button>
+        </div>
+        <div className='typeChecker'>
+          <label>
+            <input
+              className='with-gap'
+              name='filmType'
+              type='radio'
+              data-type='all'
+              onChange={this.handleRadio}
+              checked={this.state.type === 'all'}
+            />
+            <span>Всё</span>
+          </label>
+          <label>
+            <input
+              className='with-gap'
+              name='filmType'
+              type='radio'
+              data-type='series'
+              onChange={this.handleRadio}
+              checked={this.state.type === 'series'}
+            />
+            <span>Сериалы</span>
+          </label>
+          <label>
+            <input
+              className='with-gap'
+              name='filmType'
+              type='radio'
+              data-type='movie'
+              onChange={this.handleRadio}
+              checked={this.state.type === 'movie'}
+            />
+            <span>Фильмы</span>
+          </label>
         </div>
       </div>
     );
