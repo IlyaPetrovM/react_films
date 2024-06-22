@@ -4,7 +4,7 @@ export default function Header() {
             <div className="nav-wrapper">
                 <a href="#" className="brand-logo">Фильмотека</a>
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
-                    <li><a href="!#">Исходный код</a></li>
+                    <li><a href="https://github.com/IlyaPetrovM/react_films">Исходный код</a></li>
                 </ul>
             </div>
         </nav>
