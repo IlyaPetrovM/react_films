@@ -1,77 +1,79 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-export default class Search extends React.Component {
-  state = {
-    search: '',
-    type: 'all',
+export default function Search (props){
+const {searchFilms} = props;
+const [search, setSearch] = useState('');
+const [type, setType] = useState('all');
+
+  const handleChange = (event) => {
+    setSearch(event.target.value);
   };
-  handleChange = (event) => {
-    this.setState({ search: event.target.value });
-  };
-  handleKeyDown = (event) => {
+
+  const handleKeyDown = (event) => {
     if (event.code !== 'Enter') return;
-    this.props.searchFilms(this.state.search, this.state.type); // this.props доступен по-умолчанию
+    searchFilms(search, type); 
   };
-  handleRadio = (event) => {
-    this.setState({type: event.target.dataset.type}, ()=>{
-      this.props.searchFilms(this.state.search, this.state.type);
-    });
+
+  const handleRadio = (event) => {
+    setType(event.target.dataset.type)
   }
-  render() {
-    return (
-      <div className='row'>
-        <div className='input-field'>
-          <input
-            className='validate'
-            type='search'
-            value={this.state.search}
-            onChange={this.handleChange}
-            placeholder='Search'
-            onKeyDown={this.handleKeyDown}
-          />
-          <button
-            className='btn searchButton cyan darken-2'
-            onClick={() => this.props.searchFilms(this.state.search, this.state.type)}
-          >
-            Найти
-          </button>
-        </div>
-        <div className='typeChecker'>
-          <label>
-            <input
-              className='with-gap'
-              name='filmType'
-              type='radio'
-              data-type='all'
-              onChange={this.handleRadio}
-              checked={this.state.type === 'all'}
-            />
-            <span>Всё</span>
-          </label>
-          <label>
-            <input
-              className='with-gap'
-              name='filmType'
-              type='radio'
-              data-type='series'
-              onChange={this.handleRadio}
-              checked={this.state.type === 'series'}
-            />
-            <span>Сериалы</span>
-          </label>
-          <label>
-            <input
-              className='with-gap'
-              name='filmType'
-              type='radio'
-              data-type='movie'
-              onChange={this.handleRadio}
-              checked={this.state.type === 'movie'}
-            />
-            <span>Фильмы</span>
-          </label>
-        </div>
+  useEffect(()=>{
+    searchFilms(search, type);
+  }, [type])
+
+  return (
+    <div className='row'>
+      <div className='input-field'>
+        <input
+          className='validate'
+          type='search'
+          value={search}
+          onChange={handleChange}
+          placeholder='Search'
+          onKeyDown={handleKeyDown}
+        />
+        <button
+          className='btn searchButton cyan darken-2'
+          onClick={() => searchFilms(search, type)}
+        >
+          Найти
+        </button>
       </div>
-    );
-  }
+      <div className='typeChecker'>
+        <label>
+          <input
+            className='with-gap'
+            name='filmType'
+            type='radio'
+            data-type='all'
+            onChange={handleRadio}
+            checked={type === 'all'}
+          />
+          <span>Всё</span>
+        </label>
+        <label>
+          <input
+            className='with-gap'
+            name='filmType'
+            type='radio'
+            data-type='series'
+            onChange={handleRadio}
+            checked={type === 'series'}
+          />
+          <span>Сериалы</span>
+        </label>
+        <label>
+          <input
+            className='with-gap'
+            name='filmType'
+            type='radio'
+            data-type='movie'
+            onChange={handleRadio}
+            checked={type === 'movie'}
+          />
+          <span>Фильмы</span>
+        </label>
+      </div>
+    </div>
+  );
 }
