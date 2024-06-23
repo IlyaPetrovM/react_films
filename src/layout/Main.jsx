@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Movies from '../components/Movies';
 import Preloader from '../components/Preloader';
@@ -21,11 +21,13 @@ export default function Main(){
         console.error(err);
       });
   }
-  componentDidMount();
+  useEffect(()=>{
+    componentDidMount();
+  }, [])
 
   const searchFilms = (search, type = 'all') =>{
     setLoading(true);
-    fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=${API_KEY}&s=${search}${type=='all' ? '' :'&type='+type}`)
+    fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=${API_KEY}&s=${search}${type==='all' ? '' :'&type='+type}`)
       .then((res) => res.json())
       .then((data) => {
         setFilms(data.Search);
