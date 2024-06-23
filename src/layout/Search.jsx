@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 export default function Search (props){
 const {searchFilms} = props;
-const [search, setSearch] = useState('who am i');
+const [search, setSearch] = useState('');
 const [type, setType] = useState('all');
 
   const handleChange = (event) => {
