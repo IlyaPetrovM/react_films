@@ -4,26 +4,12 @@ import Header from './layout/Header';
 import Main from './layout/Main';
 import Footer from './layout/Footer';
 
-export default class App extends React.Component {
-  state = {
-    search: 'Ocean',
-    page: 1,
-  };
-
-  constructor() {
-    super();
-  }
-
-  
-
-
-  render() {
+export default function App() {
     return (
       <>
         <Header />
-        <Main search={this.state.films} />
+        <Main />
         <Footer />
       </>
     );
-  }
 }
