@@ -29,7 +29,7 @@ const [type, setType] = useState('all');
           type='search'
           value={search}
           onChange={handleChange}
-          placeholder='Search'
+          placeholder='Введите название фильма'
           onKeyDown={handleKeyDown}
         />
         <button
